@@ -11,7 +11,7 @@ import "./styles.css";
 import { FiArrowLeft } from "react-icons/fi";
 import { FaBeer } from "react-icons/fa";
 
-interface Item {
+interface Mood {
   id: number;
   title: string;
   image_url: string;
@@ -26,7 +26,7 @@ interface IBGECityResponse {
 }
 
 const CreatePoint = () => {
-  const [items, setItems] = useState<Item[]>([]);
+  const [moods, setMoods] = useState<Mood[]>([]);
   const [ufs, setUfs] = useState<string[]>([]);
   const [cities, setCities] = useState<string[]>([]);
 
@@ -47,8 +47,11 @@ const CreatePoint = () => {
     0,
     0,
   ]);
-  const [selectedItems, setSelectedItems] = useState<number[]>([]);
+  const [selectedMoods, setSelectedMoods] = useState<number[]>([]);
   const [selectedFile, setSelectedFile] = useState<File>();
+
+  const maxSelectedMoods = 3;
+  let blockMoods = false;
 
   const history = useHistory();
 
@@ -61,8 +64,8 @@ const CreatePoint = () => {
   }, []);
 
   useEffect(() => {
-    api.get("items").then((response) => {
-      setItems(response.data);
+    api.get("moods").then((response) => {
+      setMoods(response.data);
     });
   }, []);
 
@@ -114,13 +117,19 @@ const CreatePoint = () => {
     setFormData({ ...formData, [name]: value });
   }
 
-  function handleSelectItem(id: number) {
-    const alreadySelected = selectedItems.findIndex((item) => item === id);
+  function handleSelectMood(id: number) {
+    console.log(selectedMoods, id);
+
+    const alreadySelected = selectedMoods.findIndex((mood) => mood === id);
     if (alreadySelected >= 0) {
-      const filteredItems = selectedItems.filter((item) => item !== id);
-      setSelectedItems(filteredItems);
+      const filteredMoods = selectedMoods.filter((mood) => mood !== id);
+      setSelectedMoods(filteredMoods);
     } else {
-      setSelectedItems([...selectedItems, id]);
+      blockMoods = selectedMoods.length >= maxSelectedMoods;
+      if (blockMoods) {
+        return;
+      }
+      setSelectedMoods([...selectedMoods, id]);
     }
   }
 
@@ -131,7 +140,7 @@ const CreatePoint = () => {
     const uf = selectedUf;
     const lat = selectedPosition[0];
     const long = selectedPosition[1];
-    const items = selectedItems;
+    const moods = selectedMoods;
 
     const data = new FormData();
 
@@ -141,7 +150,7 @@ const CreatePoint = () => {
     data.append("lat", String(lat));
     data.append("long", String(long));
     data.append("uf", uf);
-    data.append("items", items.join(","));
+    data.append("items", moods.join(","));
 
     if (selectedFile) {
       data.append("image", selectedFile);
@@ -297,124 +306,14 @@ const CreatePoint = () => {
             </span>
           </legend>
           <ul className="items-grid">
-            <li className="" key="1" onClick={() => handleSelectItem(1)}>
-              <img
-                src="http://192.168.1.12:3333/uploads/80s.svg"
-                alt="Lalalas"
-              />
-              <span>rock</span>
-            </li>
-            <li className="" key="1" onClick={() => handleSelectItem(1)}>
-              <img
-                src="http://192.168.1.12:3333/uploads/80s.svg"
-                alt="Lalalas"
-              />
-              <span>rock</span>
-            </li>
-            <li className="" key="1" onClick={() => handleSelectItem(1)}>
-              <img
-                src="http://192.168.1.12:3333/uploads/80s.svg"
-                alt="Lalalas"
-              />
-              <span>rock</span>
-            </li>
-            <li className="" key="1" onClick={() => handleSelectItem(1)}>
-              <img
-                src="http://192.168.1.12:3333/uploads/80s.svg"
-                alt="Lalalas"
-              />
-              <span>rock</span>
-            </li>
-            <li className="" key="1" onClick={() => handleSelectItem(1)}>
-              <img
-                src="http://192.168.1.12:3333/uploads/80s.svg"
-                alt="Lalalas"
-              />
-              <span>rock</span>
-            </li>
-            <li className="" key="1" onClick={() => handleSelectItem(1)}>
-              <img
-                src="http://192.168.1.12:3333/uploads/80s.svg"
-                alt="Lalalas"
-              />
-              <span>rock</span>
-            </li>
-            <li className="" key="1" onClick={() => handleSelectItem(1)}>
-              <img
-                src="http://192.168.1.12:3333/uploads/80s.svg"
-                alt="Lalalas"
-              />
-              <span>rock</span>
-            </li>
-            <li className="" key="1" onClick={() => handleSelectItem(1)}>
-              <img
-                src="http://192.168.1.12:3333/uploads/80s.svg"
-                alt="Lalalas"
-              />
-              <span>rock</span>
-            </li>
-            <li className="" key="1" onClick={() => handleSelectItem(1)}>
-              <img
-                src="http://192.168.1.12:3333/uploads/80s.svg"
-                alt="Lalalas"
-              />
-              <span>rock</span>
-            </li>
-            <li
-              className="selected"
-              key="1"
-              onClick={() => handleSelectItem(1)}
-            >
-              <img
-                src="http://192.168.1.12:3333/uploads/80s.svg"
-                alt="Lalalas"
-              />
-              <span>rock</span>
-            </li>
-            <li className="" key="1" onClick={() => handleSelectItem(1)}>
-              <img
-                src="http://192.168.1.12:3333/uploads/80s.svg"
-                alt="Lalalas"
-              />
-              <span>rock</span>
-            </li>
-            <li className="" key="1" onClick={() => handleSelectItem(1)}>
-              <img
-                src="http://192.168.1.12:3333/uploads/80s.svg"
-                alt="Lalalas"
-              />
-              <span>rock</span>
-            </li>
-            <li className="" key="1" onClick={() => handleSelectItem(1)}>
-              <img
-                src="http://192.168.1.12:3333/uploads/80s.svg"
-                alt="Lalalas"
-              />
-              <span>rock</span>
-            </li>
-            <li className="" key="1" onClick={() => handleSelectItem(1)}>
-              <img
-                src="http://192.168.1.12:3333/uploads/80s.svg"
-                alt="Lalalas"
-              />
-              <span>rock</span>
-            </li>
-            <li className="" key="1" onClick={() => handleSelectItem(1)}>
-              <img
-                src="http://192.168.1.12:3333/uploads/80s.svg"
-                alt="Lalalas"
-              />
-              <span>rock</span>
-            </li>
-
-            {items.map((item) => (
+            {moods.map((mood) => (
               <li
-                className={selectedItems.includes(item.id) ? "selected" : ""}
-                key={item.id}
-                onClick={() => handleSelectItem(item.id)}
+                className={selectedMoods.includes(mood.id) ? "selected" : ""}
+                key={mood.id}
+                onClick={() => handleSelectMood(mood.id)}
               >
-                <img src={item.image_url} alt="Lalalas" />
-                <span>{item.title}</span>
+                <img src={mood.image_url} alt="Lalalas" />
+                <span>{mood.title}</span>
               </li>
             ))}
           </ul>
