@@ -100,7 +100,7 @@ const Profiles = () => {
   }
 
   function handleNavigateToDetail(id: number) {
-    navigation.navigate("Detail", { point_id: id });
+    navigation.navigate("Detail", { profile_id: id });
   }
 
   function handleSelectMood(id: number) {
