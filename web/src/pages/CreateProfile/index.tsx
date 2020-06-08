@@ -37,12 +37,15 @@ const CreatePoint = () => {
 
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
+    nickname: "",
     whatsapp: "",
+    spotify_uri: "",
   });
 
   const [selectedUf, setSelectedUf] = useState("0");
   const [selectedCity, setSelectedCity] = useState("0");
+  const [selectedGender, setSelectedGender] = useState("0");
+  const [selectedOrientation, setSelectedOrientation] = useState("0");
   const [selectedPosition, setSelectedPosition] = useState<[number, number]>([
     0,
     0,
@@ -54,6 +57,21 @@ const CreatePoint = () => {
   let blockMoods = false;
 
   const history = useHistory();
+
+  const genders = [
+    "Mulher cis",
+    "Mulher trans",
+    "Homem cis",
+    "Homem trans",
+    "Não binário",
+  ];
+  const orientations = [
+    "Heterossexual",
+    "Homossexual",
+    "Bissexual",
+    "Assexuado",
+    "Pansexual",
+  ];
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -107,6 +125,18 @@ const CreatePoint = () => {
     setSelectedCity(city);
   }
 
+  function handleSelectGender(event: ChangeEvent<HTMLSelectElement>) {
+    const gender = event.target.value;
+
+    setSelectedGender(gender);
+  }
+
+  function handleSelectOrientation(event: ChangeEvent<HTMLSelectElement>) {
+    const orientation = event.target.value;
+
+    setSelectedOrientation(orientation);
+  }
+
   function handleMapClick(event: LeafletMouseEvent) {
     setSelectedPosition([event.latlng.lat, event.latlng.lng]);
   }
@@ -118,8 +148,6 @@ const CreatePoint = () => {
   }
 
   function handleSelectMood(id: number) {
-    console.log(selectedMoods, id);
-
     const alreadySelected = selectedMoods.findIndex((mood) => mood === id);
     if (alreadySelected >= 0) {
       const filteredMoods = selectedMoods.filter((mood) => mood !== id);
@@ -136,7 +164,10 @@ const CreatePoint = () => {
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
 
-    const { name, email, whatsapp } = formData;
+    const { name, nickname, whatsapp, spotify_uri } = formData;
+    const gender = selectedGender;
+    const orientation = selectedOrientation;
+    const city = selectedCity;
     const uf = selectedUf;
     const lat = selectedPosition[0];
     const long = selectedPosition[1];
@@ -145,18 +176,22 @@ const CreatePoint = () => {
     const data = new FormData();
 
     data.append("name", name);
-    data.append("email", email);
+    data.append("nickname", nickname);
     data.append("whatsapp", whatsapp);
+    data.append("gender", gender);
+    data.append("orientation", orientation);
     data.append("lat", String(lat));
     data.append("long", String(long));
+    data.append("city", city);
     data.append("uf", uf);
-    data.append("items", moods.join(","));
+    data.append("moods", moods.join(","));
+    data.append("spotify_uri", spotify_uri);
 
     if (selectedFile) {
       data.append("image", selectedFile);
     }
 
-    await api.post("points", data);
+    await api.post("profiles", data);
 
     history.push("/");
   }
@@ -213,15 +248,15 @@ const CreatePoint = () => {
 
                 <label htmlFor="gender">Identidade de gênero</label>
                 <select
-                  onChange={handleSelectCity}
-                  value={selectedCity}
+                  onChange={handleSelectGender}
+                  value={selectedGender}
                   name="gender"
                   id="gender"
                 >
                   <option value="0">Selecione</option>
-                  {cities.map((city) => (
-                    <option key={city} value="{city}">
-                      {city}
+                  {genders.map((gender) => (
+                    <option key={gender} value={gender}>
+                      {gender}
                     </option>
                   ))}
                 </select>
@@ -230,15 +265,15 @@ const CreatePoint = () => {
 
                 <label htmlFor="orientation">Orientação</label>
                 <select
-                  onChange={handleSelectCity}
-                  value={selectedCity}
+                  onChange={handleSelectOrientation}
+                  value={selectedOrientation}
                   name="orientation"
                   id="orientation"
                 >
                   <option value="0">Selecione</option>
-                  {cities.map((city) => (
-                    <option key={city} value="{city}">
-                      {city}
+                  {orientations.map((orientation) => (
+                    <option key={orientation} value={orientation}>
+                      {orientation}
                     </option>
                   ))}
                 </select>
@@ -317,6 +352,25 @@ const CreatePoint = () => {
               </li>
             ))}
           </ul>
+        </fieldset>
+
+        <fieldset>
+          <legend>
+            <h2>E qual a sua música favorita de todos os tempos?</h2>
+            <span>
+              Cole a URI dela no Spotify{" "}
+              <Link to="/">Precisa de ajuda para encontrar?</Link>
+            </span>
+          </legend>
+          <div className="field">
+            <label htmlFor="spotify_uri">Spotify URI</label>
+            <input
+              onChange={handleInputChange}
+              type="text"
+              name="spotify_uri"
+              id="spotify_uri"
+            />
+          </div>
         </fieldset>
 
         <button type="submit">Finalizar perfil</button>

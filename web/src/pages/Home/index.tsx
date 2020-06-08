@@ -17,7 +17,7 @@ const Home = () => {
           <h1>Let’s rock, baby.</h1>
           <p>O amor da sua vida pode estar a uma música de distância.</p>
 
-          <Link to="/create-point">
+          <Link to="/create-profile">
             <strong>Criar perfil</strong>
           </Link>
         </main>
