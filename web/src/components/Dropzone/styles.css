@@ -1,37 +1,52 @@
 .dropzone {
-  height: 300px;
-  background: #E1FAEC;
-  border-radius: 10px;
+  height: 100%;
+  background: #111112;
+  border-radius: 4px;
 
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 48px;
   outline: 0;
+}
+
+.dropzone:hover {
+  background: var(--secondary-color);
+  cursor: pointer;
 }
 
 .dropzone img {
   width: 100%;
-  height: 100%; 
+  height: 100%;
   object-fit: cover;
 }
 
 .dropzone p {
   width: calc(100% - 60px);
   height: calc(100% - 60px);
-  border-radius: 10px;
-  border: 1px dashed #4ECB79;
+  border-radius: 4px;
+  border: 1px dashed #4ecb79;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: #333;
+  color: var(--text-color);
+  font-variant: small-caps;
+}
+
+.dropzone:hover p {
+  background: var(--secondary-color);
+  cursor: pointer;
+  background: #111112;
 }
 
 .dropzone p svg {
-  color: #4ECB79;
+  color: var(--secondary-color);
   width: 24px;
   height: 24px;
   margin-bottom: 8px;
+}
+
+.dropzone:hover svg {
+  color: var(--primary-color);
 }

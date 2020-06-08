@@ -24,14 +24,14 @@
 
 #page-create-point header a svg {
   margin-right: 16px;
-  color: var(--primary-color);
+  color: var(--secondary-color);
 }
 
 #page-create-point form {
   margin: 80px auto;
   padding: 64px;
   max-width: 730px;
-  background: #fff;
+  background: #252527;
   border-radius: 8px;
 
   display: flex;
@@ -40,9 +40,17 @@
 
 #page-create-point form h1 {
   font-size: 36px;
+  margin-bottom: 24px;
+}
+
+#page-create-point form h2 {
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--text-color);
 }
 
 #page-create-point form fieldset {
+  width: 100%;
   margin-top: 64px;
   min-inline-size: auto;
   border: 0;
@@ -52,7 +60,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   margin-bottom: 40px;
 }
 
@@ -62,8 +70,19 @@
 
 #page-create-point form legend span {
   font-size: 14px;
+  margin-top: 20px;
   font-weight: normal;
   color: var(--text-color);
+}
+
+#page-create-point form legend span a {
+  color: var(--secondary-color);
+  text-decoration: none;
+}
+
+#page-create-point form legend span a:hover {
+  color: var(--primary-color);
+  text-decoration: none;
 }
 
 #page-create-point form .field-group {
@@ -82,9 +101,8 @@
 #page-create-point form .field input[type="text"],
 #page-create-point form .field input[type="email"],
 #page-create-point form .field input[type="number"] {
-  flex: 1;
-  background: #f0f0f5;
-  border-radius: 8px;
+  background: #111112;
+  border-radius: 4px;
   border: 0;
   padding: 16px 24px;
   font-size: 16px;
@@ -96,8 +114,8 @@
   -moz-appearance: none;
   appearance: none;
   flex: 1;
-  background: #f0f0f5;
-  border-radius: 8px;
+  background: #111112;
+  border-radius: 4px;
   border: 0;
   padding: 16px 24px;
   font-size: 16px;
@@ -149,10 +167,10 @@
   width: 260px;
   height: 56px;
   background: var(--primary-color);
-  border-radius: 8px;
+  border-radius: 4px;
   color: #fff;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 24px;
   border: 0;
   align-self: flex-end;
   margin-top: 40px;
@@ -161,22 +179,22 @@
 }
 
 #page-create-point form button:hover {
-  background: #2fb86e;
+  background: var(--secondary-color);
 }
 
 .items-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 16px;
   list-style: none;
 }
 
 .items-grid li {
-  background: #f5f5f5;
-  border: 2px solid #f5f5f5;
-  height: 180px;
-  border-radius: 8px;
-  padding: 32px 24px 16px;
+  background: #161617;
+  border: 2px solid #161617;
+  height: 106px;
+  border-radius: 4px;
+  padding: 20px 24px;
 
   display: flex;
   flex-direction: column;
@@ -194,10 +212,53 @@
 
   display: flex;
   align-items: center;
-  color: var(--title-color);
+  color: var(--text-color);
+  font-variant: small-caps;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: lowercase;
+}
+
+.items-grid li:hover {
+  border: 2px solid #313137;
+}
+
+.items-grid li:hover span {
+  color: var(--primary-color);
 }
 
 .items-grid li.selected {
-  background: #e1faec;
-  border: 2px solid #34cb79;
+  background: var(--secondary-color);
+  border: 2px solid var(--secondary-color);
+}
+
+.items-grid li.selected span {
+  color: #000;
+}
+
+#page-create-point .footer {
+  margin-bottom: 50px;
+}
+
+#page-create-point .footer p {
+  text-align: center;
+  font-variant: small-caps;
+  font-size: 14px;
+  color: #71757b;
+}
+
+#page-create-point .footer p svg {
+  margin-bottom: -3px;
+}
+
+#page-create-point .footer p a {
+  font-variant: small-caps;
+  font-size: 14px;
+  color: #71757b;
+  text-decoration: none;
+}
+
+#page-create-point .footer p a:hover {
+  color: var(--primary-color);
 }

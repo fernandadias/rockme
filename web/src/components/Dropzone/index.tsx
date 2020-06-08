@@ -36,7 +36,7 @@ const Dropzone: React.FC<Props> = ({ onFileUploaded }) => {
       ) : (
         <p>
           <FiUpload />
-          Drag 'n' drop some files here, or click to select files
+          sua foto mais bonita :)
         </p>
       )}
     </div>
