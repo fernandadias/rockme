@@ -42,10 +42,10 @@ interface Params {
   city: string;
 }
 
-const Points = () => {
+const Profiles = () => {
   const [moods, setMoods] = useState<Item[]>([]);
   const [selectedMoods, setSelectedMoods] = useState<number[]>([]);
-  const [points, setPoints] = useState<Point[]>([]);
+  const [profiles, setProfiles] = useState<Point[]>([]);
 
   const navigation = useNavigation();
   const route = useRoute();
@@ -84,14 +84,14 @@ const Points = () => {
 
   useEffect(() => {
     api
-      .get("points", {
+      .get("profiles", {
         params: {
           uf: routeParams.uf,
           moods: selectedMoods,
         },
       })
       .then((response) => {
-        setPoints(response.data);
+        setProfiles(response.data);
       });
   }, [selectedMoods]);
 
@@ -139,22 +139,21 @@ const Points = () => {
                   longitudeDelta: 0.014,
                 }}
               >
-                {points.map((point) => (
+                {profiles.map((profile) => (
                   <Marker
-                    key={String(point.id)}
+                    key={String(profile.id)}
                     style={styles.mapMarker}
-                    onPress={() => handleNavigateToDetail(point.id)}
+                    onPress={() => handleNavigateToDetail(profile.id)}
                     coordinate={{
-                      latitude: point.lat,
-                      longitude: point.long,
+                      latitude: profile.lat,
+                      longitude: profile.long,
                     }}
                   >
                     <View style={styles.mapMarkerContainer}>
                       <Image
                         style={styles.mapMarkerImage}
-                        source={{ uri: point.image_url }}
+                        source={{ uri: profile.image_url }}
                       />
-                      <Text style={styles.mapMarkerTitle}>{point.name}</Text>
                     </View>
                   </Marker>
                 ))}
@@ -235,27 +234,23 @@ const styles = StyleSheet.create({
   },
 
   mapMarkerContainer: {
-    width: 90,
+    width: 70,
     height: 70,
-    backgroundColor: "#34CB79",
+    borderRadius: 100,
+    borderWidth: 2,
+    borderColor: "#FF3D9A",
+    backgroundColor: "transparent",
     flexDirection: "column",
-    borderRadius: 8,
     overflow: "hidden",
     alignItems: "center",
   },
 
   mapMarkerImage: {
-    width: 90,
-    height: 45,
+    width: 50,
+    height: 50,
+    marginTop: 8,
+    borderRadius: 100,
     resizeMode: "cover",
-  },
-
-  mapMarkerTitle: {
-    flex: 1,
-    fontFamily: "Roboto_400Regular",
-    color: "#FFF",
-    fontSize: 13,
-    lineHeight: 23,
   },
 
   itemsContainer: {
@@ -299,4 +294,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Points;
+export default Profiles;

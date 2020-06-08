@@ -19,7 +19,7 @@ const Home = () => {
   const navigation = useNavigation();
 
   function handleNavigateToPoints() {
-    navigation.navigate("Points", {
+    navigation.navigate("Profiles", {
       uf,
       city,
     });
