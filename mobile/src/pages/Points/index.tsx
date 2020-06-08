@@ -12,6 +12,7 @@ import {
   ScrollView,
   Image,
   Alert,
+  ImageBackground,
 } from "react-native";
 import { Feather as Icon } from "@expo/vector-icons";
 import { useNavigation, useRoute } from "@react-navigation/native";
@@ -114,71 +115,76 @@ const Points = () => {
 
   return (
     <>
-      <View style={styles.container}>
-        <TouchableOpacity onPress={handleNavigateBack}>
-          <Icon name="arrow-left" size={20} color="#34cb79" />
-        </TouchableOpacity>
-        <Text style={styles.title}>Bem vindo.</Text>
-        <Text style={styles.description}>
-          Encontre no mapa um ponto de coleta
-        </Text>
+      <ImageBackground
+        source={require("../../assets/splash.png")}
+        imageStyle={{
+          resizeMode: "cover",
+        }}
+        style={styles.container}
+      >
+        <View style={styles.container}>
+          <TouchableOpacity onPress={handleNavigateBack}>
+            <Icon name="arrow-left" size={20} color="#34cb79" />
+          </TouchableOpacity>
+          <Text style={styles.title}>Veja quem está por perto :)</Text>
 
-        <View style={styles.mapContainer}>
-          {initialPosition[0] !== 0 && (
-            <MapView
-              style={styles.map}
-              initialRegion={{
-                latitude: initialPosition[0],
-                longitude: initialPosition[1],
-                latitudeDelta: 0.014,
-                longitudeDelta: 0.014,
-              }}
-            >
-              {points.map((point) => (
-                <Marker
-                  key={String(point.id)}
-                  style={styles.mapMarker}
-                  onPress={() => handleNavigateToDetail(point.id)}
-                  coordinate={{
-                    latitude: point.lat,
-                    longitude: point.long,
-                  }}
-                >
-                  <View style={styles.mapMarkerContainer}>
-                    <Image
-                      style={styles.mapMarkerImage}
-                      source={{ uri: point.image_url }}
-                    />
-                    <Text style={styles.mapMarkerTitle}>{point.name}</Text>
-                  </View>
-                </Marker>
-              ))}
-            </MapView>
-          )}
+          <View style={styles.mapContainer}>
+            {initialPosition[0] !== 0 && (
+              <MapView
+                style={styles.map}
+                initialRegion={{
+                  latitude: initialPosition[0],
+                  longitude: initialPosition[1],
+                  latitudeDelta: 0.014,
+                  longitudeDelta: 0.014,
+                }}
+              >
+                {points.map((point) => (
+                  <Marker
+                    key={String(point.id)}
+                    style={styles.mapMarker}
+                    onPress={() => handleNavigateToDetail(point.id)}
+                    coordinate={{
+                      latitude: point.lat,
+                      longitude: point.long,
+                    }}
+                  >
+                    <View style={styles.mapMarkerContainer}>
+                      <Image
+                        style={styles.mapMarkerImage}
+                        source={{ uri: point.image_url }}
+                      />
+                      <Text style={styles.mapMarkerTitle}>{point.name}</Text>
+                    </View>
+                  </Marker>
+                ))}
+              </MapView>
+            )}
+          </View>
         </View>
-      </View>
-      <View style={styles.itemsContainer}>
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator
-          contentContainerStyle={{ paddingHorizontal: 20 }}
-        >
-          {items.map((item) => (
-            <TouchableOpacity
-              activeOpacity={0.6}
-              key={String(item.id)}
-              style={[
-                styles.item,
-                selectedItems.includes(item.id) ? styles.selectedItem : {},
-              ]}
-              onPress={() => handleSelectItem(item.id)}
-            >
-              <SvgUri width={42} height={42} uri={item.image_url} />
-              <Text style={styles.itemTitle}>{item.title}</Text>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
-      </View>
+        <View style={styles.itemsContainer}>
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator
+            contentContainerStyle={{ paddingHorizontal: 20 }}
+          >
+            {items.map((item) => (
+              <TouchableOpacity
+                activeOpacity={0.6}
+                key={String(item.id)}
+                style={[
+                  styles.item,
+                  selectedItems.includes(item.id) ? styles.selectedItem : {},
+                ]}
+                onPress={() => handleSelectItem(item.id)}
+              >
+                <SvgUri width={42} height={42} uri={item.image_url} />
+                <Text style={styles.itemTitle}>{item.title}</Text>
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+        </View>
+      </ImageBackground>
     </>
   );
 };
@@ -186,21 +192,16 @@ const Points = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 32,
-    paddingTop: 20 + Constants.statusBarHeight,
+    paddingHorizontal: 16,
+    paddingTop: Constants.statusBarHeight,
   },
 
   title: {
     fontSize: 20,
-    fontFamily: "Ubuntu_700Bold",
+    fontFamily: "Montserrat_700Bold",
     marginTop: 24,
-  },
-
-  description: {
-    color: "#6C6C80",
-    fontSize: 16,
-    marginTop: 4,
-    fontFamily: "Roboto_400Regular",
+    marginBottom: 24,
+    color: "#FFFFFF",
   },
 
   mapContainer: {
@@ -209,6 +210,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     overflow: "hidden",
     marginTop: 16,
+    borderColor: "#4AB955",
+    borderStyle: "solid",
+    borderWidth: 2,
   },
 
   map: {
