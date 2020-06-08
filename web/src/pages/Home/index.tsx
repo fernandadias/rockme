@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FaBeer, FaHeart } from "react-icons/fa";
+import { FaBeer } from "react-icons/fa";
 
 import "./styles.css";
 import logo from "../../assets/rockme-logo.svg";
@@ -27,11 +27,7 @@ const Home = () => {
       </div>
       <div className="footer">
         <p>
-          feito pela{" "}
-          <Link to="https://github.com/fernandadias/" target="_blank">
-            nanda
-          </Link>{" "}
-          com muita <FaBeer /> e <FaHeart /> durante a{" "}
+          feito com muita <FaBeer /> durante a{" "}
           <Link to="https://nextlevelweek.com/" target="_blank">
             next level week 1.0
           </Link>

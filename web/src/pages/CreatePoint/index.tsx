@@ -1,14 +1,15 @@
 import axios from "axios";
 import { LeafletMouseEvent } from "leaflet";
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { FiArrowLeft } from "react-icons/fi";
 import { Map, Marker, TileLayer } from "react-leaflet";
 import { Link, useHistory } from "react-router-dom";
 import logo from "../../assets/rockme-logo.svg";
 import Dropzone from "../../components/Dropzone";
 import api from "../../services/api";
 import "./styles.css";
-import { FaBeer, FaHeart } from "react-icons/fa";
+
+import { FiArrowLeft } from "react-icons/fi";
+import { FaBeer } from "react-icons/fa";
 
 interface Item {
   id: number;
@@ -423,11 +424,7 @@ const CreatePoint = () => {
       </form>
       <div className="footer">
         <p>
-          feito pela{" "}
-          <Link to="https://github.com/fernandadias/" target="_blank">
-            nanda
-          </Link>{" "}
-          com muita <FaBeer /> e <FaHeart /> durante a{" "}
+          feito com muita <FaBeer /> durante a{" "}
           <Link to="https://nextlevelweek.com/" target="_blank">
             next level week 1.0
           </Link>
