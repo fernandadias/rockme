@@ -5,19 +5,19 @@ import multer from "multer";
 import multerConfig from "./config/multer";
 
 import ProfilesController from "./controllers/ProfilesController";
-import ItemsController from "./controllers/ItemsController";
+import MoodsController from "./controllers/MoodsController";
 
 const routes = express.Router();
 const upload = multer(multerConfig);
 
 const profilesController = new ProfilesController();
-const itemsController = new ItemsController();
+const moodsController = new MoodsController();
 
 routes.get("/", (request, response) => {
   return response.json({ message: "asd" });
 });
 
-routes.get("/items", itemsController.index);
+routes.get("/moods", moodsController.index);
 routes.get("/profiles", profilesController.index);
 routes.get("/profiles/:id", profilesController.show);
 
@@ -37,7 +37,7 @@ routes.post(
         city: Joi.string().required(),
         uf: Joi.string().required().max(2),
         spotify_uri: Joi.string().required(),
-        items: Joi.string().required(),
+        moods: Joi.string().required(),
       }),
     },
     {
