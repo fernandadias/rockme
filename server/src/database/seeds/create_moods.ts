@@ -1,7 +1,7 @@
 import Knex from "knex";
 
 export async function seed(knex: Knex) {
-  await knex("styles").insert([
+  await knex("moods").insert([
     { title: "80s", image: "80s.svg" },
     { title: "Blues", image: "blues.svg" },
     { title: "Chilli", image: "chilli.svg" },
