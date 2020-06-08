@@ -43,8 +43,8 @@ interface Params {
 }
 
 const Points = () => {
-  const [items, setItems] = useState<Item[]>([]);
-  const [selectedItems, setSelectedItems] = useState<number[]>([]);
+  const [moods, setMoods] = useState<Item[]>([]);
+  const [selectedMoods, setSelectedMoods] = useState<number[]>([]);
   const [points, setPoints] = useState<Point[]>([]);
 
   const navigation = useNavigation();
@@ -77,8 +77,8 @@ const Points = () => {
   }, []);
 
   useEffect(() => {
-    api.get("items").then((response) => {
-      setItems(response.data);
+    api.get("moods").then((response) => {
+      setMoods(response.data);
     });
   }, []);
 
@@ -87,13 +87,13 @@ const Points = () => {
       .get("points", {
         params: {
           uf: routeParams.uf,
-          items: selectedItems,
+          moods: selectedMoods,
         },
       })
       .then((response) => {
         setPoints(response.data);
       });
-  }, [selectedItems]);
+  }, [selectedMoods]);
 
   function handleNavigateBack() {
     navigation.goBack();
@@ -103,13 +103,13 @@ const Points = () => {
     navigation.navigate("Detail", { point_id: id });
   }
 
-  function handleSelectItem(id: number) {
-    const alreadySelected = selectedItems.findIndex((item) => item === id);
+  function handleSelectMood(id: number) {
+    const alreadySelected = selectedMoods.findIndex((mood) => mood === id);
     if (alreadySelected >= 0) {
-      const filteredItems = selectedItems.filter((item) => item !== id);
-      setSelectedItems(filteredItems);
+      const filteredMoods = selectedMoods.filter((item) => item !== id);
+      setSelectedMoods(filteredMoods);
     } else {
-      setSelectedItems([...selectedItems, id]);
+      setSelectedMoods([...selectedMoods, id]);
     }
   }
 
@@ -168,18 +168,27 @@ const Points = () => {
             showsHorizontalScrollIndicator
             contentContainerStyle={{ paddingHorizontal: 20 }}
           >
-            {items.map((item) => (
+            {moods.map((mood) => (
               <TouchableOpacity
                 activeOpacity={0.6}
-                key={String(item.id)}
+                key={String(mood.id)}
                 style={[
-                  styles.item,
-                  selectedItems.includes(item.id) ? styles.selectedItem : {},
+                  styles.mood,
+                  selectedMoods.includes(mood.id) ? styles.selectedMood : {},
                 ]}
-                onPress={() => handleSelectItem(item.id)}
+                onPress={() => handleSelectMood(mood.id)}
               >
-                <SvgUri width={42} height={42} uri={item.image_url} />
-                <Text style={styles.itemTitle}>{item.title}</Text>
+                <SvgUri width={42} height={42} uri={mood.image_url} />
+                <Text
+                  style={[
+                    styles.moodTitle,
+                    selectedMoods.includes(mood.id)
+                      ? styles.selectedMoodTitle
+                      : {},
+                  ]}
+                >
+                  {mood.title}
+                </Text>
               </TouchableOpacity>
             ))}
           </ScrollView>
@@ -255,10 +264,10 @@ const styles = StyleSheet.create({
     marginBottom: 32,
   },
 
-  item: {
-    backgroundColor: "#fff",
+  mood: {
+    backgroundColor: "#252527",
     borderWidth: 2,
-    borderColor: "#eee",
+    borderColor: "#252527",
     height: 120,
     width: 120,
     borderRadius: 8,
@@ -272,15 +281,21 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 
-  selectedItem: {
-    borderColor: "#34CB79",
+  selectedMood: {
+    borderColor: "#FF3D9A",
+    backgroundColor: "#FF3D9A",
     borderWidth: 2,
   },
 
-  itemTitle: {
+  moodTitle: {
     fontFamily: "Roboto_400Regular",
     textAlign: "center",
     fontSize: 13,
+    color: "#4AB955",
+  },
+
+  selectedMoodTitle: {
+    color: "#FFFFFF",
   },
 });
 
