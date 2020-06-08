@@ -1,26 +1,38 @@
 :root {
-  --primary-color: #34CB79;
-  --title-color: #322153;
-  --text-color: #6C6C80;
+  --primary-color: #4ab955;
+  --secondary-color: #ff3d9a;
+  --title-color: #ffffff;
+  --text-color: #a3aeb4;
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  transition: all 0.2s cubic-bezier(0.45, 0, 0.55, 1);
 }
 
 body {
-  background: #F0F0F5;
+  background-color: #161617;
+  background-image: url("./assets/quadrado-bg.svg");
+  background-repeat: repeat;
   -webkit-font-smoothing: antialiased;
   color: var(--text-color);
 }
 
-body, input, button {
-  font-family: Roboto, Arial, Helvetica, sans-serif;
+body,
+input,
+button {
+  font-family: Montserrat, Arial, Helvetica, sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: var(--title-color);
-  font-family: Ubuntu;
+  font-family: Montserrat, Arial, Helvetica, sans-serif;
+  font-weight: 900;
 }
