@@ -10,7 +10,6 @@ import {
   Platform,
 } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
-import { Feather as Icon } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
 const Home = () => {
@@ -32,19 +31,22 @@ const Home = () => {
       behavior={Platform.OS === "ios" ? "padding" : undefined}
     >
       <ImageBackground
-        source={require("../../assets/home-background.png")}
+        source={require("../../assets/splash.png")}
         imageStyle={{
-          width: 274,
-          height: 368,
+          resizeMode: "cover",
         }}
         style={styles.container}
       >
         <View style={styles.main}>
-          <Image source={require("../../assets/logo.png")} />
+          <Image source={require("../../assets/rockme-logo.png")} />
+          <Image
+            style={styles.bullets}
+            source={require("../../assets/bullets.png")}
+          />
           <View>
-            <Text style={styles.title}>Seu marketplace de resíduos</Text>
+            <Text style={styles.title}>Let's rock, baby</Text>
             <Text style={styles.description}>
-              Ajudamos pessoas a encontrarm pontos de coleta de forma eficiente
+              Encontre o amor da sua vida a uma música de distância.
             </Text>
           </View>
         </View>
@@ -67,12 +69,7 @@ const Home = () => {
             autoCorrect={false}
           />
           <RectButton style={styles.button} onPress={handleNavigateToPoints}>
-            <View style={styles.buttonIcon}>
-              <Text>
-                <Icon name="arrow-right" color="#FFF" />
-              </Text>
-            </View>
-            <Text style={styles.buttonText}>Entrar</Text>
+            <Text style={styles.buttonText}>ENCONTRAR</Text>
           </RectButton>
         </View>
       </ImageBackground>
@@ -91,21 +88,27 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 
+  bullets: {
+    position: "absolute",
+    right: 0,
+    top: 50,
+  },
+
   title: {
-    color: "#322153",
-    fontSize: 32,
-    fontFamily: "Ubuntu_700Bold",
+    color: "#FFFFFF",
+    fontSize: 48,
+    fontFamily: "Montserrat_700Bold",
     maxWidth: 260,
     marginTop: 64,
   },
 
   description: {
-    color: "#6C6C80",
-    fontSize: 16,
+    color: "#A3AEB4",
+    fontSize: 22,
     marginTop: 16,
-    fontFamily: "Roboto_400Regular",
+    fontFamily: "Montserrat_400Regular",
     maxWidth: 260,
-    lineHeight: 24,
+    lineHeight: 34,
   },
 
   footer: {},
@@ -114,18 +117,19 @@ const styles = StyleSheet.create({
 
   input: {
     height: 60,
-    backgroundColor: "#FFF",
-    borderRadius: 10,
+    backgroundColor: "#252527",
+    color: "#A0A0B2",
+    borderRadius: 4,
     marginBottom: 8,
     paddingHorizontal: 24,
     fontSize: 16,
   },
 
   button: {
-    backgroundColor: "#34CB79",
+    backgroundColor: "#FF3D9A",
     height: 60,
     flexDirection: "row",
-    borderRadius: 10,
+    borderRadius: 4,
     overflow: "hidden",
     alignItems: "center",
     marginTop: 8,

@@ -3,14 +3,17 @@ import { AppLoading } from "expo";
 import { View, StatusBar } from "react-native";
 
 import { Ubuntu_700Bold, useFonts } from "@expo-google-fonts/ubuntu";
-import { Roboto_400Regular, Roboto_500Medium } from "@expo-google-fonts/roboto";
+import {
+  Montserrat_400Regular,
+  Montserrat_700Bold,
+} from "@expo-google-fonts/montserrat";
 
 import Routes from "./src/routes";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
-    Roboto_400Regular,
-    Roboto_500Medium,
+    Montserrat_400Regular,
+    Montserrat_700Bold,
     Ubuntu_700Bold,
   });
 
@@ -21,7 +24,7 @@ export default function App() {
   return (
     <>
       <StatusBar
-        barStyle="dark-content"
+        barStyle="light-content"
         backgroundColor="transparent"
         translucent
       />
