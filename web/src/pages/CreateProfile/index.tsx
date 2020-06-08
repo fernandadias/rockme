@@ -324,7 +324,7 @@ const CreatePoint = () => {
               >
                 <option value="0">Selecione uma Cidade</option>
                 {cities.map((city) => (
-                  <option key={city} value="{city}">
+                  <option key={city} value={city}>
                     {city}
                   </option>
                 ))}
