@@ -20,10 +20,10 @@ A proposta foi uma aplicação web em React e mobile em React Native que consome
 Hoje o Rock.me tem a seguinte proposta:
 * **Moods** já previamente cadastrados no banco
 * Cadastro de **profile** pela aplicação web
-* Esse cadastro já integrado com mapa para captura da geo localização
+* Esse cadastro já integrado com mapa para captura da geolocalização
 * Integração com a API do IBGE para requisição de UFs e Cidades
 * Pesquisa de **profiles** pelo app mobile
-* Um único back-end que gerencia as requisiçes dos dois apps
+* Um único back-end que gerencia as requisições dos dois apps
 
 ### Stack
 - [TypeScript](https://www.typescriptlang.org/)
@@ -39,7 +39,7 @@ O layout original do Ecoleta está disponível no **[Figma da Rockseat](https://
 
 ### Requisitos
 
-- **[Node.js](https://nodejs.org/en/)** instalado na máquina e de um gerenciador de dependencias (**[NPM](https://www.npmjs.com/)** ou **[Yarn](https://yarnpkg.com/)**)
+- **[Node.js](https://nodejs.org/en/)** instalado na máquina e de um gerenciador de dependencias (**[npm](https://www.npmjs.com/)** ou **[yarn](https://yarnpkg.com/)**)
 - **[Expo](https://expo.io/)** instalado **globalmente**
 
 
